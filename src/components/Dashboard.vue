@@ -1,45 +1,9 @@
 <template>
   <div class="container">
     <div>
-      <el-upload
-        class="upload-demo"
-        action="https://jsonplaceholder.typicode.com/posts/"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
-        :before-remove="beforeRemove"
-        multiple
-        :limit="3"
-        :on-exceed="handleExceed"
-        :file-list="fileList">
-      <el-button size="small" type="primary">Click to upload</el-button>
-      <div slot="tip" class="el-upload__tip">Any file less than 513 MB</div>
-    </el-upload>
     </div>
     <div>
-      <el-table
-        v-bind:data="fileListTableData"
-        style="width: 100%">
-        <el-table-column
-          prop="name"
-          label="Name"
-          fixed="left"
-          align="left">
-        </el-table-column>
-        <el-table-column
-          prop="fileInfo.{DAV:}getcontentlength"
-          label="Size"
-          width="150"
-          fixed="right"
-          align="right">
-        </el-table-column>
-        <el-table-column
-          prop="fileInfo.{DAV:}getlastmodified"
-          label="Uploaded"
-          width="300"
-          fixed="right"
-          align="left">
-        </el-table-column>
-      </el-table>
+      <b-table striped hover :items="fileListTableItems" :fields="fileListTableFields"></b-table>
     </div>
   </div>
 </template>
@@ -59,7 +23,24 @@ export default {
   name: 'Dashboard',
   data () {
     return {
-      fileListTableData: []
+      fileListTableFields: [
+        {
+          key: 'name',
+          label: 'Name',
+          sortable: false
+        },
+        {
+          key: 'fileInfo.{DAV:}getcontentlength',
+          label: 'Size',
+          sortable: false
+        },
+        {
+          key: 'fileInfo.{DAV:}getlastmodified',
+          label: 'Last Modified',
+          sortable: false
+        }
+      ],
+      fileListTableItems: []
     }
   },
   created: function () {
@@ -67,17 +48,15 @@ export default {
   },
   methods: {
     fetchFiles () {
-      // List all files
       oc.files.list('/').then(files => {
         files.shift()
-        console.log(files[0].fileInfo)
 
         // Remove slash at the begining of the file name
         for (var i = 0; i < files.length; i++) {
           files[i].name = files[i].name.substring(1, files[i].name.length)
         }
 
-        this.$data.fileListTableData = files
+        this.$data.fileListTableItems = files
       }).catch(error => {
         console.log(error)
       })
@@ -87,7 +66,7 @@ export default {
 </script>
 
 <style scoped>
-  .container{
+  .container {
     margin: 5%;
   }
 </style>
