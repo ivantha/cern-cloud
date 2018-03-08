@@ -1,6 +1,16 @@
 <template>
   <div class="container">
     <div class="upload-container">
+      <form ref='uploadForm'
+            id='uploadForm'
+            action='http://localhost:7000/files/upload'
+            method='post'
+            encType="multipart/form-data"
+            onsubmit="setTimeout(function () { window.location.reload(); }, 10)"
+      >
+        <input type="file" name="clientFile" />
+        <input type='submit' value='Upload!' />
+      </form>
     </div>
     <div class="file-container">
       <b-table hover :items="fileListTableItems" :fields="fileListTableFields"></b-table>

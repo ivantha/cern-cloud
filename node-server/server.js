@@ -1,5 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var multer = require('multer')
 
 var owncloud = require('js-owncloud-client');
 var oc = new owncloud('http://localhost:80');
@@ -13,6 +14,9 @@ oc.login('ivantha', 'cat').then(status => {
 
 var app = express();
 app.use(bodyParser.json());
+
+const fileUpload = require('express-fileupload');
+app.use(fileUpload());
 
 // Disable CORS
 app.use(function (req, res, next) {
@@ -34,7 +38,22 @@ app.get("/files/all", function (req, res, next) {
     res.status(200).json(files);
   }).catch(error => {
     console.log(error);
-    res.status(400).json(error);
+    res.status(400).end
+  });
+});
+
+app.post('/files/upload', function(req, res) {
+  req.files.clientFile.mv('./uploads/' + req.files.clientFile.name, function(err) {
+    if (err){
+      return res.status(500).send(err);
+    }else{
+      oc.files.putFile('/', './uploads/' + req.files.clientFile.name).then(status => {
+        // Successfully uploaded to the OwnCloud
+        res.status(200).end 
+      }).catch(error => {
+        console.log(error)
+      })    
+    } 
   });
 });
 
