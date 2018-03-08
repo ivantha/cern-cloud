@@ -1,14 +1,16 @@
 <template>
   <div class="container">
-    <div>
+    <div class="upload-container">
     </div>
-    <div>
-      <b-table striped hover :items="fileListTableItems" :fields="fileListTableFields"></b-table>
+    <div class="file-container">
+      <b-table hover :items="fileListTableItems" :fields="fileListTableFields"></b-table>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 var Owncloud = require('js-owncloud-client')
 var oc = new Owncloud('http://localhost:80')
 
@@ -60,6 +62,22 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+    },
+    onFileUpload (uFileList) {
+      var newURL = URL.createObjectURL(uFileList[0])
+      newURL = newURL.substring(5, newURL.length)
+      console.log(newURL)
+      axios({
+        method: 'put',
+        url: 'http://localhost:80/remote.php/webdav/' + uFileList[0].name,
+        data: {
+          username: 'ivantha',
+          password: 'cat',
+          content: newURL
+        }
+      }).then(res => {
+        console.log(res)
+      })
     }
   }
 }
@@ -68,5 +86,8 @@ export default {
 <style scoped>
   .container {
     margin: 5%;
+  }
+  .upload-container{
+    margin-bottom: 50px;
   }
 </style>

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <img src="./assets/logo.png" style="width: 200px"/>
     <h1>CERN Cloud</h1>
     <router-view/>
   </div>
