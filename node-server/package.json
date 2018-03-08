@@ -12,6 +12,7 @@
     "nodemon": "^1.17.1"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "js-owncloud-client": "^0.1.3"
   }
 }

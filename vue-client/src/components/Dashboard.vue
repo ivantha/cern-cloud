@@ -11,16 +11,6 @@
 <script>
 import axios from 'axios'
 
-var Owncloud = require('js-owncloud-client')
-var oc = new Owncloud('http://localhost:80')
-
-// Login
-oc.login('ivantha', 'cat').then(status => {
-  // Login successful
-}).catch(error => {
-  console.log(error)
-})
-
 export default {
   name: 'Dashboard',
   data () {
@@ -49,45 +39,25 @@ export default {
     this.fetchFiles()
   },
   methods: {
-    fetchFiles () {
-      oc.files.list('/').then(files => {
-        files.shift()
-
-        // Remove slash at the begining of the file name
-        for (var i = 0; i < files.length; i++) {
-          files[i].name = files[i].name.substring(1, files[i].name.length)
-        }
-
-        this.$data.fileListTableItems = files
-      }).catch(error => {
-        console.log(error)
-      })
-    },
-    onFileUpload (uFileList) {
-      var newURL = URL.createObjectURL(uFileList[0])
-      newURL = newURL.substring(5, newURL.length)
-      console.log(newURL)
-      axios({
-        method: 'put',
-        url: 'http://localhost:80/remote.php/webdav/' + uFileList[0].name,
-        data: {
-          username: 'ivantha',
-          password: 'cat',
-          content: newURL
-        }
-      }).then(res => {
-        console.log(res)
-      })
+    async fetchFiles () {
+      axios
+        .get('http://localhost:7000/files/all')
+        .then(res => {
+          this.$data.fileListTableItems = res.data
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
 </script>
 
 <style scoped>
-  .container {
-    margin: 5%;
-  }
-  .upload-container{
-    margin-bottom: 50px;
-  }
+.container {
+  margin: 5%;
+}
+.upload-container {
+  margin-bottom: 50px;
+}
 </style>
