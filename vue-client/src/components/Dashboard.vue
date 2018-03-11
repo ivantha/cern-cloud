@@ -2,10 +2,10 @@
   <div class="fluid-container">
     <div class="upload-container">
       <form ref='uploadForm'
-              id='uploadForm'
-              action='http://localhost:7000/files/upload'
-              method='post'
-              encType="multipart/form-data"
+            id='uploadForm'
+            action='http://localhost:7000/files/upload'
+            method='post'
+            encType="multipart/form-data"
       >
         <input type="file" name="clientFile" aria-label="Select file"/>
         <input type='submit' value='Upload!' aria-label="Upload"/>
@@ -41,36 +41,36 @@
 </template>
 
 <script>
-import axios from 'axios'
+  import axios from 'axios'
 
-export default {
-  name: 'Dashboard',
-  data () {
-    return {
-      fileListTableItems: []
-    }
-  },
-  created: function () {
-    this.fetchFiles()
-  },
-  methods: {
-    async fetchFiles () {
-      axios
-        .get('http://localhost:7000/files/all')
-        .then(res => {
-          this.$data.fileListTableItems = res.data
-          console.log(res.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+  export default {
+    name: 'Dashboard',
+    data () {
+      return {
+        fileListTableItems: []
+      }
     },
-    onClickDownload (fileName) {
-      var url = 'http://localhost:7000/files/download?filename=' + fileName
-      window.open(url.replace(' ', '+'))
+    created: function () {
+      this.fetchFiles()
+    },
+    methods: {
+      async fetchFiles () {
+        axios
+          .get('http://localhost:7000/files/all')
+          .then(res => {
+            this.$data.fileListTableItems = res.data
+            console.log(res.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      },
+      onClickDownload (fileName) {
+        var url = 'http://localhost:7000/files/download?filename=' + fileName
+        window.open(url.replace(' ', '+'))
+      }
     }
   }
-}
 </script>
 
 <style scoped>
@@ -78,7 +78,6 @@ export default {
     margin-left: 4%;
     margin-right: 4%;
     margin-top: 1%;
-    /*background-color: #F6C6CE;*/
   }
 
   .upload-container {
