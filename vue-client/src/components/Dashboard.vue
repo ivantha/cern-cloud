@@ -7,8 +7,8 @@
               method='post'
               encType="multipart/form-data"
       >
-        <input type="file" name="clientFile"/>
-        <input type='submit' value='Upload!'/>
+        <input type="file" name="clientFile" aria-label="Select file"/>
+        <input type='submit' value='Upload!' aria-label="Upload"/>
       </form>
     </div>
     <div class="file-container">

@@ -51,18 +51,26 @@ app.get("/files/all", function (req, res, next) {
 });
 
 app.post('/files/upload', function(req, res) {
-  req.files.clientFile.mv('./uploads/' + req.files.clientFile.name, function(err) {
-    if (err){
-      return res.status(500).send(err);
-    }else{
-      oc.files.putFile('/', './uploads/' + req.files.clientFile.name).then(status => {
-        // Successfully uploaded to the OwnCloud
-        res.status(200).end
-      }).catch(error => {
-        console.log(error)
-      })    
-    } 
-  });
+  if(typeof req.files.clientFile == 'undefined'){
+    res.status(200).end()
+  }else{
+    req.files.clientFile.mv('./uploads/' + req.files.clientFile.name, function(err) {
+      if (err){
+        return res.status(500).send(err);
+      }else{
+        oc.files.putFile('/', './uploads/' + req.files.clientFile.name).then(status => {
+          // Successfully uploaded to the OwnCloud
+          res.writeHead(302, {
+            'Location': 'http://localhost:8080/#/'
+            //add other headers here...
+          });
+          res.end();
+        }).catch(error => {
+          console.log(error)
+        })    
+      } 
+    });
+  }
 });
 
 app.get("/files/download", function (req, res, next) {

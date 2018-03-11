@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="description" content="CERN Cloud">
+
+    <link rel="manifest" href="/manifest.json">
+
     <title>cern-cloud</title>
   </head>
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        console.log("Will the service worker register?");
+        navigator.serviceWorker.register('service-worker.js')
+          .then(function(reg){
+            console.log("Yes, it did.");
+          }).catch(function(err) {
+          console.log("No it didn't. This happened: ", err)
+        });
+      }
+    </script>
   </body>
 </html>

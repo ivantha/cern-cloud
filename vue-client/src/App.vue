@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="app-head">
-      <img src="./assets/logo.png" style="width: 200px"/>
+      <img src="./assets/logo.png" alt="CERNBox logo" style="width: 200px"/>
       <h1>CERN Cloud</h1>
     </div>
     <router-view/>
