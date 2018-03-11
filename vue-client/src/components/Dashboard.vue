@@ -1,19 +1,41 @@
 <template>
-  <div class="container">
+  <div class="fluid-container">
     <div class="upload-container">
       <form ref='uploadForm'
-            id='uploadForm'
-            action='http://localhost:7000/files/upload'
-            method='post'
-            encType="multipart/form-data"
-            onsubmit="setTimeout(function () { window.location.reload(); }, 10)"
+              id='uploadForm'
+              action='http://localhost:7000/files/upload'
+              method='post'
+              encType="multipart/form-data"
       >
-        <input type="file" name="clientFile" />
-        <input type='submit' value='Upload!' />
+        <input type="file" name="clientFile"/>
+        <input type='submit' value='Upload!'/>
       </form>
     </div>
     <div class="file-container">
-      <b-table hover :items="fileListTableItems" :fields="fileListTableFields"></b-table>
+      <table style="width: 100%">
+        <tr>
+          <th style="text-align: left">
+            Name
+          </th>
+          <th style="text-align: right">
+            Size (KB)
+          </th>
+          <th>
+            Download
+          </th>
+        </tr>
+        <tr :key="file.name" v-for="file in fileListTableItems">
+          <td style="text-align: left">
+            {{file.name}}
+          </td>
+          <td style="text-align: right">
+            {{file.size}}
+          </td>
+          <td>
+            <button v-on:click="onClickDownload(file.name)">Download</button>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </template>
@@ -25,23 +47,6 @@ export default {
   name: 'Dashboard',
   data () {
     return {
-      fileListTableFields: [
-        {
-          key: 'name',
-          label: 'Name',
-          sortable: false
-        },
-        {
-          key: 'fileInfo.{DAV:}getcontentlength',
-          label: 'Size',
-          sortable: false
-        },
-        {
-          key: 'fileInfo.{DAV:}getlastmodified',
-          label: 'Last Modified',
-          sortable: false
-        }
-      ],
       fileListTableItems: []
     }
   },
@@ -54,20 +59,34 @@ export default {
         .get('http://localhost:7000/files/all')
         .then(res => {
           this.$data.fileListTableItems = res.data
+          console.log(res.data)
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    onClickDownload (fileName) {
+      var url = 'http://localhost:7000/files/download?filename=' + fileName
+      window.open(url.replace(' ', '+'))
     }
   }
 }
 </script>
 
 <style scoped>
-.container {
-  margin: 5%;
-}
-.upload-container {
-  margin-bottom: 50px;
-}
+  .fluid-container {
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 1%;
+    /*background-color: #F6C6CE;*/
+  }
+
+  .upload-container {
+    margin-bottom: 2%;
+  }
+
+  .file-container {
+    position: relative;
+    display: inline;
+  }
 </style>
