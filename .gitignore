@@ -134,5 +134,3 @@ uploads/*
 downloads/*
 
 dist
-
-*.report.html
