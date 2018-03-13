@@ -134,3 +134,6 @@ uploads/*
 downloads/*
 
 dist
+
+localhost.cert
+localhost.key

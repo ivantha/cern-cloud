@@ -1,11 +1,5 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var multer = require('multer');
-const path = require('path');
-const http = require('http');
-const url = require('url');
-const fs = require('fs');
-const util = require('util');
 
 var owncloud = require('js-owncloud-client');
 var oc = new owncloud('http://localhost:80');

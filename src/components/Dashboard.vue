@@ -59,7 +59,6 @@
           .get('http://localhost:7000/files/all')
           .then(res => {
             this.$data.fileListTableItems = res.data
-            console.log(res.data)
           })
           .catch(err => {
             console.log(err)

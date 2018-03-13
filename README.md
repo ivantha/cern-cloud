@@ -25,7 +25,7 @@ npm install
 npm run build
 ```
 
-##### 3) Start the server
+##### 3) Start the server at http://localhost:4040/#/
 ```
 nodemon server-start.js
 ```
