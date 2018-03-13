@@ -61,7 +61,7 @@ app.post('/files/upload', function (req, res) {
         oc.files.putFile('/', './uploads/' + req.files.clientFile.name).then(status => {
           // Successfully uploaded to the OwnCloud
           res.writeHead(302, {
-            'Location': 'http://localhost:8080/#/'
+            'Location': 'http://localhost:4040/#/'
             //add other headers here...
           });
           res.end();
