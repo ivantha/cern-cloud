@@ -1,45 +1,30 @@
 # cern-cloud
 
-[![Build Status](https://travis-ci.org/OshanIvantha/cern-cloud.svg?branch=master)](https://travis-ci.org/OshanIvantha/cern-cloud)
+> CERN Cloud for administrating ownCloud
 
-## Instructions to run the app
+## Build Setup
 
-### Starting the ownCloud instance
-Install Docker and run,
-
-```
-$ docker run -d -p 80:80 owncloud:8.1
-```
-
-### Starting the node server
-
-Go to the node-server directory from the root directory using
-```
-cd node-server
-```
-
-Install dependancies
-```
+``` bash
+# install dependencies
 npm install
-```
 
-Run the server using the command,
-```
-nodemon server.js
-```
-
-### Starting the app
-Go to the vue-client directory from the root directory using
-```
-cd vue-client
-```
-
-Install dependancies
-```
-npm install
-```
-
-Run the app using the command,
-```
+# serve with hot reload at localhost:8080
 npm run dev
+
+# build for production with minification
+npm run build
+
+# build for production and view the bundle analyzer report
+npm run build --report
+
+# run unit tests
+npm run unit
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
 ```
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
