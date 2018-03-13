@@ -2,29 +2,30 @@
 
 > CERN Cloud for administrating ownCloud
 
-## Build Setup
+## Setup ownCloud
 
-``` bash
-# install dependencies
-npm install
+You must have an instance of ownCloud running in localhost:80 for the app to work.
 
-# serve with hot reload at localhost:8080
-npm run dev
+##### 1) Install and run Docker
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+##### 2) Execute the command, 
+```
+docker run -d -p 80:80 owncloud:8.1
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Build Setup
+
+##### 1) Install dependencies
+```
+npm install
+```
+
+##### 2) Build for production with minification
+```
+npm run build
+```
+
+##### 3) Start the server
+```
+nodemon server-start.js
+```

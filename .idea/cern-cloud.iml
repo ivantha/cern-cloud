@@ -3,8 +3,11 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/Exercise" />
+      <excludeFolder url="file://$MODULE_DIR$/downloads" />
       <excludeFolder url="file://$MODULE_DIR$/temp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/uploads" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
