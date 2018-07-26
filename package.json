@@ -36,7 +36,7 @@
     "chromedriver": "^2.33.1",
     "connect-history-api-fallback": "^1.4.0",
     "copy-webpack-plugin": "^4.5.2",
-    "cross-env": "^5.0.5",
+    "cross-env": "^5.2.0",
     "cross-spawn": "^5.1.0",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
