@@ -76,7 +76,7 @@
     "selenium-server": "^3.6.0",
     "semver": "^5.5.1",
     "shelljs": "^0.7.8",
-    "sinon": "^4.0.1",
+    "sinon": "^7.0.0",
     "sinon-chai": "^2.14.0",
     "sw-precache-webpack-plugin": "^0.11.4",
     "uglify-es": "^3.1.3",
